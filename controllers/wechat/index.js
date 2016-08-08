@@ -22,10 +22,10 @@ controller.validation = function *(next) {
 
 	if (sha1Str == signature) {
 		this.body = echostr;
-		//log('wechat validation success');
+		this.log('wechat validation success');
 	} else {
 		this.status = 500;
-		//log('wechat validation error');
+		this.log('wechat validation error');
 	}
 }
 
