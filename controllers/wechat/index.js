@@ -8,8 +8,13 @@ const token = CONFIG.wechat.token;
 
 const controller = {}
 
-controller.validation = function *(next) {
+controller.main = function *(next) {
+	console.debug(this.request.body)
 
+	this.body = "success";
+}
+
+controller.validation = function *(next) {
 	const signature = this.query.signature;
 	const timestamp = this.query.timestamp;
 	const nonce = this.query.nonce;
@@ -17,8 +22,6 @@ controller.validation = function *(next) {
 
 	const sha1 = crypto.createHash('sha1');
 	const sha1Str = sha1.update([token, timestamp, nonce].sort().join('')).digest('hex');
-
-	this.set('Content-Type', 'text/plain');
 
 	if (sha1Str == signature) {
 		this.body = echostr;

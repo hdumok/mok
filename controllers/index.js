@@ -37,8 +37,6 @@ function getControllers(root, dirs) {
 
 const dirList = getControllers(controllersRoot, controllersDir);
 
-//log("【 register router start 】");
-
 for (let dir of dirList) {
 
 	const config = require(path.join(dir, 'config.json'));
@@ -64,12 +62,8 @@ for (let dir of dirList) {
 			args.push(constroller[func]);
 		});
 
-		//log(' %s  %s ', method, publicPath);
-
 		router[method.toLowerCase()].apply(router, args);
 	}
 }
-
-//log("【 register router end  】")
 
 export default router.routes();
