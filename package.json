@@ -4,6 +4,9 @@
   "description": "koa + vue + webpack + wechat",
   "main": "app.js",
   "dependencies": {
+    "babel-plugin-transform-runtime": "^6.0.0",
+    "babel-preset-es2015": "^6.0.0",
+    "babel-preset-stage-2": "^6.0.0",
     "babel-polyfill": "^6.9.1",
     "babel-register": "^6.11.6",
     "babel-runtime": "^6.11.6",
