@@ -1,0 +1,7 @@
+{
+    "status": true,
+    "prefix": "/wechat",
+    "routes": {
+        "GET /validation" : "validation"
+    }
+}
