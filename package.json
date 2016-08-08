@@ -23,8 +23,7 @@
     "koa-static-server": "^0.1.8",
     "koa-validate": "^1.0.6",
     "log4js": "^0.6.38",
-    "mysql": "^2.11.1",
-    "pm2-webhook": "^1.1.2"
+    "mysql": "^2.11.1"
   },
   "devDependencies": {},
   "scripts": {
