@@ -1,7 +1,0 @@
-{
-    "status": true,
-    "prefix": "/test",
-    "routes": {
-        "GET /halloword": "get"
-    }
-}

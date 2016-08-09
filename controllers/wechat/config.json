@@ -1,8 +1,0 @@
-{
-    "status": true,
-    "prefix": "/wechat",
-    "routes": {
-        "GET /" : "validation",
-        "POST /" : "main"
-    }
-}

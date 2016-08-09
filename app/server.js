@@ -13,7 +13,7 @@ import koaBody from 'koa-body';
 import koa from 'koa';
 
 import middlewares from '../middlewares';
-import controllers from '../controllers'
+import controllers from '../controllers/server'
 import lib from '../lib';
 
 let app = koa();
@@ -43,11 +43,11 @@ app.use(lib);
 
 app.use(controllers);
 
-app.listen(CONFIG.port, function (err) {
+app.listen(CONFIG.server.port, function (err) {
 	if (err) {
 		console.error(err);
 		return;
 	}
 
-	console.log('==== server started in %s mode, listening on %s ====', NODE_ENV, CONFIG.port);
+	console.log('==== server started in %s mode, listening on %s ====', NODE_ENV, CONFIG.server.port);
 });

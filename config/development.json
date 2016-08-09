@@ -1,5 +1,15 @@
 {
-	"port": 3000,
+	"server": {
+		"name":"server",
+		"port": 8000
+	},
+	"wechat": {
+		"name":"wechat",
+		"port": 3000,
+		"token": "mok",
+		"appID": "wxaee817e3c36f89eb",
+		"appsecret": "54a8f3813d54fff61cd3a06691c75051"
+	},
 	"mysql": {
 		"client": "mysql",
 		"connection": {
@@ -16,10 +26,5 @@
 			"connectionLimit": 1
 		},
 		"debug": false
-	},
-	"wechat": {
-		"token": "mok",
-		"appID": "wxaee817e3c36f89eb",
-		"appsecret": "54a8f3813d54fff61cd3a06691c75051"
 	}
 }

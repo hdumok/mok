@@ -15,4 +15,5 @@ global.Promise = require('bluebird');
 global.CONSTANTS = require('./const');
 global.CONFIG = require('./config')[NODE_ENV];
 
-require('./app/server')
+//require('./app/server');
+require('./app/wechat');
