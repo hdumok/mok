@@ -4,7 +4,8 @@
 
 export default function *() {
 
-    this.debug("收到消息:" + this.weixin);
+    this.debug("收到消息:");
+    this.debug(this.weixin);
 
     this.body = [
         {

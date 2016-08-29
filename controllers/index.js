@@ -18,7 +18,7 @@ function isController(dirPath) {
 
 function getControllers(root, dirs) {
 
-	let list = []
+	let list = [];
 	for(let dir of dirs){
 		let dirPath = path.join(root, dir);
 		if(!fs.lstatSync(dirPath).isDirectory())

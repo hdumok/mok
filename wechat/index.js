@@ -2,6 +2,7 @@
  * Created by hdumok on 2016/8/5.
  */
 
+import co from 'co';
 import fs from 'fs';
 import path from 'path';
 import Wechat from 'co-wechat';
@@ -23,9 +24,21 @@ for (var file of wechatFile) {
 		Object.assign(wechat, out);
 }
 
+co(function *() {
+    yield wechat.init(function () {
+        console.log("初始化微信成功")
+    });
+}).catch(e => {
+    console.error("初始化微信失败")
+    console.error(e)
+})
+
 const middlewares = robot.middleware(function *() {
 
-	yield wechat.init;
+	//消息分发
+
+
+	//自动回复
 	yield wechat.auto;
 });
 

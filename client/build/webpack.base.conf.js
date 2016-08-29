@@ -13,7 +13,9 @@ module.exports = {
     alias: {
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
-      'components': path.resolve(__dirname, '../src/components')
+      'components': path.resolve(__dirname, '../src/components'),
+      'vux-components': 'vux/src/components',
+      'vux-styles': 'vux/src/styles'
     }
   },
   resolveLoader: {
@@ -24,6 +26,10 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: 'vue'
+      },
+      {
+        test: /vux.src.*?js$/,
+        loader: 'babel'
       },
       {
         test: /\.js$/,
@@ -57,6 +63,12 @@ module.exports = {
       }
     ]
   },
+  node: {
+      fs: 'empty'
+  },
+  externals: [
+      {  "./cptable": "var cptable",  "./jszip": "jszip" }
+  ],
   vue: {
     loaders: utils.cssLoaders()
   }

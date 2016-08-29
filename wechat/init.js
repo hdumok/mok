@@ -2,6 +2,8 @@
  * Created by hdumok on 2016/8/9.
  */
 
+import _ from 'lodash';
+import compose from 'koa-compose';
 import WechatAPI from 'co-wechat-api';
 
 const appID = CONFIG.wechat.appID;
@@ -9,24 +11,11 @@ const appsecret = CONFIG.wechat.appsecret;
 
 const api = new WechatAPI(appID, appsecret);
 
-let initd = false;
+let init = {};
 
-export default function *() {
+init.createMenu = function *(next) {
 
-	if (!initd){
-
-		yield* createMenu;
-
-		initd = true;
-	}
-	else{
-		this.debug("已经初始化过了")
-	}
-}
-
-const createMenu = function *() {
-	
-	let menu = {
+	const menu = {
 		"button": [
 			{
 				"type": "click",
@@ -45,10 +34,15 @@ const createMenu = function *() {
 			}
 		]
 	}
-	var result = api.createMenu(menu);
-	console.debug(result)
-		
-	console.debug("创建微信菜单成功")
 
-	return;
+	const result = yield api.createMenu(menu);
+
+	if (result.errcode == 0) 
+		console.debug("创建微信菜单成功");
+	else
+        console.error("创建微信菜单失败, errmsg: " + result.errmsg);
+
+    next();
 }
+
+export default compose(_.values(init));

@@ -7,7 +7,7 @@
 import koa from 'koa';
 import koaBody from 'koa-body';
 
-import wechatMiddlewares from '../wechat'
+import wechat from '../wechat'
 import lib from '../lib';
 
 let app = koa();
@@ -17,7 +17,7 @@ app.use(koaBody());
 
 app.use(lib);
 
-app.use(wechatMiddlewares);
+app.use(wechat);
 
 app.listen(CONFIG.wechat.port, function (err) {
     if (err) {
