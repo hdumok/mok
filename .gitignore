@@ -1,10 +1,6 @@
 logs
-*.log
 npm-debug.log
 **node_modules
 .npm
 .idea
 sftp-config.json
-client_test
-client_backend
-**dist
