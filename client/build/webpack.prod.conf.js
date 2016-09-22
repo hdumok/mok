@@ -14,7 +14,7 @@ var webpackConfig = merge(baseWebpackConfig, {
 	devtool: config.build.cssSourceMap ? '#source-map' : false,
 	output: {
 		path: config.build.assetsRoot,
-		filename: utils.assetsPath('js/[name].[chunkhash].js'),
+		filename: utils.assetsPath('js/[name].js'),
 		chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
 	},
 	vue: {
@@ -34,11 +34,9 @@ var webpackConfig = merge(baseWebpackConfig, {
 			}
 		}),
 		new webpack.optimize.OccurenceOrderPlugin(),
-		// extract css into its own file
-		new ExtractTextPlugin(utils.assetsPath('css/[name].[chunkhash].css')),
-		// generate dist index.html with correct asset hash for caching.
-		// you can customize output by editing /index.html
-		// see https://github.com/ampedandwired/html-webpack-plugin
+
+		new ExtractTextPlugin(utils.assetsPath('css/[name].css')),
+
 		new HtmlWebpackPlugin({
 			filename: config.build.index,
 			template: 'index.html',
@@ -67,8 +65,7 @@ var webpackConfig = merge(baseWebpackConfig, {
 				)
 			}
 		}),
-		// extract webpack runtime and module manifest to its own file in order to
-		// prevent vendor hash from being updated whenever app bundle is updated
+
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'manifest',
 			chunks: ['vendor']

@@ -1,49 +1,61 @@
-console.log('starting main......');
+'use strict';
 
-var bootcss = require('./libs/plugins/bootstrap-3.1.1/css/bootstrap.css');
-var jquicss = require('./libs/plugins/jquery-ui-1.10.4/jquery-ui.css');
-var fontcss = require('./libs/plugins/font-awesome-4.1.0/css/font-awesome.css');
-var stylecss = require('./css/style.css');
-var animatecss = require('./css/animate.css');
-var stylerespcss = require('./css/style-responsive.css');
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
+import VueValidator from 'vue-validator'
 
+import app from './app.vue'
+import routes from './routes.json'
 
-var jq=require('./libs/plugins/jquery-1.7.2/jquery-1.8.2.js');
-var bootjs = require('./libs/plugins/bootstrap-3.1.1/js/bootstrap.min.js');
-var slimscroll = require('./libs/plugins/slimscroll/jquery.slimscroll.js');
-
-var Vue = require('vue');
-Vue.use(require('./libs/vue-resource'));
-var App = require('./app.vue');
-
-var VueRouter = require('./libs/vue-router');
 Vue.use(VueRouter);
+Vue.use(VueResource);
+Vue.use(VueValidator);
 
-var vm = new Vue({
-  components: {
-    app: App
-  },
-  created:function(){
-  	console.log("starting......");
-  },
-  ready: function() {
-      // GET request
-      this.$http.get('/Exhibition/getTest', function (data, status, request) {
-          // set data on vm
-          console.log('data=======>'+data);
-          this.$set('someData', data)
+Vue.http.interceptors.push({
+    request: function (request) {
+        if (request.method === 'post' || request.method === 'put') {
+            if (request.data) {
+                var data = request.data;
+                for (var key in data) {
+                    if (typeof data[key] === 'undefined' || data[key] === null) {
+                        delete data[key]
+                    }
+                }
+            }
+        }
+        return request
+    },
 
-      }).error(function (data, status, request) {
-          // handle error
-      })
+    response: function (response) {
+        if (response.data.msg) {
+            if (response.status >= 200 && response.status < 300) {
+                window.Messenger().post({
+                    hideAfter: 2,
+                    type: 'success',
+                    message: response.data.msg
+                })
+            } else {
+                window.Messenger().post({
+                    hideAfter: 2,
+                    type: 'error',
+                    message: response.data.msg
+                })
+                if (response.status === 401) {
+                    window.location.hash = '#!/signin'
+                }
+            }
+        }
+        return response
     }
-});
+})
 
 var router = new VueRouter({
-  hashbang:false,
+    hashbang:true
 });
+
 //登录中间验证，页面需要登录而没有登录的情况直接跳转登录
-router.beforeEach(function(transition){
+/*router.beforeEach(function(transition){
     if (transition.to.auth) {
         if (localStorage.userId) {
             transition.next();
@@ -54,37 +66,15 @@ router.beforeEach(function(transition){
     } else {
         transition.next();
     }
-});
-require('./routers')(router);
-router.start(App,'#app');
+});*/
 
+for(let key in routes){
+    routes[key] = {
+        component (resolve) {
+            require(['pages/' + routes[key]], resolve)
+        }
+    }
+}
 
-$(document).ready(function() {
-	handleSlimScroll();
-	handleSidebarMenu();
-});
-var handleSidebarMenu = function() {
-    "use strict";
-    $(".sidebar .nav > .has-sub > a").click(function() {
-        var e = $(this).next(".sub-menu");
-        var t = ".sidebar .nav > li.has-sub > .sub-menu";
-        $(t).not(e).slideUp(250);
-        $(e).slideToggle(250)
-    });
-    $(".sidebar .nav > .has-sub .sub-menu li.has-sub > a").click(function() {
-        var e = $(this).next(".sub-menu");
-        $(e).slideToggle(250)
-    })
-};
-
-var handleSlimScroll = function() {
-    "use strict";
-    $("[data-scrollbar=true]").each(function() {
-        var e = $(this).attr("data-height");
-        e = !e ? $(this).height() : e;
-        $(this).slimScroll({
-            height: e,
-            alwaysVisible: true
-        })
-    })
-};
+router.map(routes);
+router.start(app,'#app');

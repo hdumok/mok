@@ -24,15 +24,7 @@ for (var file of wechatFile) {
 		Object.assign(wechat, out);
 }
 
-co(function *() {
-    yield wechat.init(function () {
-        console.log("初始化微信成功")
-    });
-}).catch(e => {
-    console.error("初始化微信失败")
-    console.error(e)
-})
-
+//robot 只针对微信端发过来的消息和事件
 const middlewares = robot.middleware(function *() {
 
 	//消息分发

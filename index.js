@@ -16,5 +16,5 @@ global.CONSTANTS = require('./const');
 global.CONFIG = require('./config')[NODE_ENV];
 global.LOG_LEVEL = process.env.LOG_LEVEL ||"LOG";
 
-//require('./app/server');
+require('./app/server');
 require('./app/wechat');

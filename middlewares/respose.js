@@ -8,7 +8,7 @@ export default function *(next) {
 
 	yield next;
 
-	//if(typeof this.body === "number" || typeof this.body === "string"){
-	//	this.body = {msg : this.body}
-	//}
+	if(typeof this.body === "number" || typeof this.body === "string"){
+		this.body = {msg : this.body}
+	}
 }

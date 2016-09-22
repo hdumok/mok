@@ -1,6 +1,6 @@
 {
     "status": true,
-    "prefix": "/test",
+    "prefix": "/api/test",
     "routes": {
         "GET /": "get"
     }

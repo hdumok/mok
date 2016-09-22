@@ -1,0 +1,30 @@
+{
+	"server": {
+		"name":"server",
+		"port": 8000
+	},
+	"wechat": {
+		"name":"wechat",
+		"port": 3000,
+		"token": "mok",
+		"appID": "wx6a3a761a424c8663",
+		"appsecret": "5103563813d34ed2b560d4334edfa7d4"
+	},
+	"mysql": {
+		"client": "mysql",
+		"connection": {
+			"host": "mok.space",
+			"port": 3306,
+			"user": "mok",
+			"password": "mok",
+			"database": "mok",
+			"charset": "UTF8_GENERAL_CI",
+			"connectTimeout": 15000,
+			"stringifyObjects": false,
+			"multipleStatements": true,
+			"supportBigNumbers": true,
+			"connectionLimit": 1
+		},
+		"debug": false
+	}
+}

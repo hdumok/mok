@@ -25,6 +25,6 @@
 			"supportBigNumbers": true,
 			"connectionLimit": 1
 		},
-		"debug": false
+		"debug": true
 	}
 }

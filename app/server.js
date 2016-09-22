@@ -13,10 +13,10 @@ import koaBody from 'koa-body';
 import koa from 'koa';
 
 import middlewares from '../middlewares';
-import controllers from '../controllers/server'
+import controllers from '../controllers'
 import lib from '../lib';
 
-let app = koa();
+const app = koa();
 
 // x-response-time
 app.use(koaResponseTime());
@@ -25,7 +25,8 @@ app.use(koaResponseTime());
 app.use(koaCompress());
 
 // serve static
-app.use(koaStaticServer({rootDir: __dirname + '/client/static', rootPath: '/static'}));
+app.use(koaStaticServer({rootDir: ROOT + '/client/dist', rootPath: '/'}));
+app.use(koaStaticServer({rootDir: ROOT + '/client/dist/static', maxage: 30 * 24 * 60 * 60 * 1000, gzip: true, rootPath: '/static'}));
 
 // session
 app.keys = ['mok'];
