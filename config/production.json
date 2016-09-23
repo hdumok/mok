@@ -7,8 +7,8 @@
 		"name":"wechat",
 		"port": 3000,
 		"token": "mok",
-		"appID": "wx6a3a761a424c8663",
-		"appsecret": "5103563813d34ed2b560d4334edfa7d4"
+		"appID": "wxaee817e3c36f89eb",
+		"appsecret": "54a8f3813d54fff61cd3a06691c75051"
 	},
 	"mysql": {
 		"client": "mysql",

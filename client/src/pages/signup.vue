@@ -1,7 +1,7 @@
 <template>
     <div class="login-bg"></div>
     <div class="login-wrapper">
-        <a href="index.html">
+        <a v-link="{path: '/'}">
             <img class="logo" src="/static/img/logo-white.png">
         </a>
         <div class="box">
@@ -11,7 +11,7 @@
                 <input class="form-control" type="password" placeholder="Password">
                 <input class="form-control" type="password" placeholder="Confirm Password">
                 <div class="action">
-                    <a class="btn-glow primary signup" href="index.html">注册</a>
+                    <a class="btn-glow primary signup" v-link="{path: '/'}">注册</a>
                 </div>
             </div>
         </div>

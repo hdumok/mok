@@ -3,9 +3,6 @@
 语法：
     ES6
 
-日志：
-    debug + pm2 logs
-
 业务请求：
     参数检查：validation模块
     成功：200状态码

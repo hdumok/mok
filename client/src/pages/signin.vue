@@ -1,7 +1,7 @@
 <template>
     <div class="login-bg"></div>
     <div class="login-wrapper">
-        <a href="index.html">
+        <a v-link="{path: '/'}">
             <img class="logo" src="/static/img/logo-white.png">
         </a>
 
@@ -36,7 +36,7 @@
         components: {},
         methods: {
             signin: function () {
-                this.$route.router.go('/index')
+                this.$route.router.go('/')
             }
         }
     }

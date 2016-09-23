@@ -27,11 +27,25 @@ for (var file of wechatFile) {
 //robot 只针对微信端发过来的消息和事件
 const middlewares = robot.middleware(function *() {
 
+	console.debug(this.weixin)
+	
 	//消息分发
-
-
-	//自动回复
-	yield wechat.auto;
+	switch(this.weixin.MsgType){
+		case "event":
+			yield wechat.text;
+			break;
+		case "text":
+			yield wechat.text;
+			break;
+		case "image":
+			yield wechat.image;
+			break;
+		case "voice":
+			yield wechat.image;
+			break;	
+		default:
+			yield wechat.auto;
+	}
 });
 
 export default middlewares;

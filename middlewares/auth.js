@@ -5,7 +5,7 @@
 "use strict";
 
 export default function *(next) {
-
+	/*
 	if(!this.session.user){
 		if(NODE_ENV !== "development"){
 			this.status = 401;
@@ -15,6 +15,6 @@ export default function *(next) {
 
 		this.session.user = "mok";
 	}
-	
+	*/
 	yield next;
 };
