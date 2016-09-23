@@ -6,7 +6,7 @@ import VueResource from 'vue-resource'
 import VueValidator from 'vue-validator'
 
 import app from './app.vue'
-import routes from './routes.json'
+import routes from './routes.js'
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
@@ -51,7 +51,9 @@ Vue.http.interceptors.push({
 })
 
 var router = new VueRouter({
-    hashbang:true
+    hashbang:true,
+    transitionOnLoad: true,
+    linkActiveClass: 'active'
 });
 
 //登录中间验证，页面需要登录而没有登录的情况直接跳转登录
@@ -67,14 +69,6 @@ var router = new VueRouter({
         transition.next();
     }
 });*/
-
-for(let key in routes){
-    routes[key] = {
-        component (resolve) {
-            require(['pages/' + routes[key]], resolve)
-        }
-    }
-}
 
 router.map(routes);
 router.start(app,'#app');

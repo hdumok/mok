@@ -1,7 +1,7 @@
 <template>
     <div id="sidebar-nav">
         <ul id="dashboard-menu">
-            <li class="active">
+            <li>
                 <a v-link="{path: '/'}">
                     <i class="icon-home"></i>
                     <span>首页</span>
@@ -14,79 +14,65 @@
                 </a>
             </li>
             <li>
-                <a class="dropdown-toggle" href="#">
+                <a class="dropdown-toggle" v-link="#">
                     <i class="icon-group"></i>
                     <span>用户</span>
                     <i class="icon-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                    <li><a href="user-list.html">用户列表</a></li>
-                    <li><a href="new-user.html">新用户</a></li>
-                    <li><a href="user-profile.html">用户资料</a></li>
+                    <li><a v-link="{path: '/userList'}">用户列表</a></li>
+                    <li><a v-link="{path: '/newUser'}">新用户</a></li>
+                    <li><a v-link="{path: '/userProfile'}">用户资料</a></li>
                 </ul>
             </li>
             <li>
-                <a class="dropdown-toggle" href="#">
+                <a class="dropdown-toggle" v-link="#">
                     <i class="icon-edit"></i>
                     <span>表单</span>
                     <i class="icon-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                    <li><a href="form-showcase.html">表单应用</a></li>
-                    <li><a href="form-wizard.html">表单验证</a></li>
+                    <li><a v-link="{path: '/formShowcase'}">表单应用</a></li>
+                    <li><a v-link="{path: 'formWizard'}">表单验证</a></li>
                 </ul>
             </li>
             <li>
-                <a href="gallery.html">
+                <a v-link="{path: '/gallery'}">
                     <i class="icon-picture"></i>
                     <span>相册</span>
                 </a>
             </li>
             <li>
-                <a href="calendar.html">
-                    <i class="icon-calendar-empty"></i>
-                    <span>日历</span>
-                </a>
-            </li>
-            <li>
-                <a class="dropdown-toggle" href="tables.html">
+                <a class="dropdown-toggle" v-link="#">
                     <i class="icon-th-large"></i>
                     <span>表格</span>
                     <i class="icon-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                    <li><a href="tables.html">常用表格</a></li>
-                    <li><a href="datatables.html">数据表格</a></li>
+                    <li><a v-link="{path:'/tables'}">常用表格</a></li>
+                    <li><a v-link="{path:'/datatables'}">数据表格</a></li>
                 </ul>
             </li>
             <li>
-                <a class="dropdown-toggle ui-elements" href="#">
+                <a  v-link="{path:'/icons'}">
                     <i class="icon-code-fork"></i>
                     <span>UI 组件</span>
-                    <i class="icon-chevron-down"></i>
                 </a>
-                <ul class="submenu">
-                    <li><a href="ui-elements.html">UI 组件</a></li>
-                    <li><a href="icons.html">Icons图标</a></li>
-                </ul>
             </li>
             <li>
-                <a href="personal-info.html">
+                <a v-link="{path: '/personalInfo'}">
                     <i class="icon-cog"></i>
                     <span>我的信息</span>
                 </a>
             </li>
             <li>
-                <a class="dropdown-toggle" href="#">
+                <a class="dropdown-toggle" v-link="#">
                     <i class="icon-share-alt"></i>
                     <span>其他</span>
                     <i class="icon-chevron-down"></i>
                 </a>
                 <ul class="submenu">
-                    <li><a href="code-editor.html">代码编辑器</a></li>
-                    <li><a href="grids.html">网格</a></li>
-                    <li><a href="signin.html">登录</a></li>
-                    <li><a href="signup.html">注册</a></li>
+                     <li><a v-link="{path:'/grids'}">网格</a></li>
                 </ul>
             </li>
         </ul>
@@ -95,9 +81,13 @@
 
 <script>
     export default {
-        data (){
-            return {};
-        }
+        data () {
+            return {
+                title: 'mok管理系统'
+            }
+        },
+        components: {},
+        methods: {}
     }
 </script>
 

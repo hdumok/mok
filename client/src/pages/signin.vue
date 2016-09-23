@@ -1,9 +1,7 @@
 <template>
     <div class="login-bg"></div>
     <div class="login-wrapper">
-        <a v-link="{path: '/'}">
-            <img class="logo" src="/static/img/logo-white.png">
-        </a>
+        <img class="logo" src="/static/img/logo-white.png">
 
         <div class="box">
             <div class="content-wrap">

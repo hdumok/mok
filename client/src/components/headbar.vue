@@ -7,11 +7,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" v-link="{path: '/'}""><img src="/static/img/logo.png"></a>
+            <a class="navbar-brand" v-link="{path: '/'}"><img src="/static/img/logo.png"></a>
         </div>
         <ul class="nav navbar-nav pull-right hidden-xs">
             <li class="notification-dropdown hidden-xs hidden-sm">
-                <a href="#" class="trigger">
+                <a href="javascript;" class="trigger">
                     <i class="icon-envelope"></i>
                     <span class="count">8</span>
                 </a>
@@ -57,15 +57,13 @@
                     <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="personal-info.html">个人信息</a></li>
-                    <li><a href="#">账号设置</a></li>
-                    <li><a v-link="{path: '/signup'}">退出</a></li>
+                    <li><a v-link="{path: '/personalInfo'}">个人信息</a></li>
+                    <li><a v-link="{path: '/signin'}">退出</a></li>
                 </ul>
             </li>
         </ul>
     </header>
 </template>
-
 
 <script>
     export default {

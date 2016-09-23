@@ -19,7 +19,7 @@
         },
         methods: {
             signin: function () {
-                this.$route.router.go('/')
+                this.$route.router.go('/signin')
             }
         }
     }

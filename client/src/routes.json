@@ -1,8 +1,0 @@
-{
-    "/index":"index.vue",
-
-    "/signin":"signin.vue",
-    "/signup":"signup.vue",
-
-	"/wechat":"wechat.vue"
-}
