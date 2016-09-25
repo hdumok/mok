@@ -10,13 +10,18 @@
 		"appID": "wxaee817e3c36f89eb",
 		"appsecret": "54a8f3813d54fff61cd3a06691c75051"
 	},
+	"redis": {
+		"host": "mok.space",
+		"port": 6379,
+		"password": "123456"
+	},
 	"mysql": {
 		"client": "mysql",
 		"connection": {
 			"host": "mok.space",
 			"port": 3306,
 			"user": "mok",
-			"password": "mok",
+			"password": "123456",
 			"database": "mok",
 			"charset": "UTF8_GENERAL_CI",
 			"connectTimeout": 15000,

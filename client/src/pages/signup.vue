@@ -11,7 +11,7 @@
                 <input class="form-control" type="password" placeholder="Password">
                 <input class="form-control" type="password" placeholder="Confirm Password">
                 <div class="action">
-                    <a class="btn-glow primary signup" v-link="{path: '/'}">注册</a>
+                    <a class="btn-glow primary signup" v-link="{path: '/api/user/signup'}">注册</a>
                 </div>
             </div>
         </div>

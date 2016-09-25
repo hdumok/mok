@@ -6,9 +6,10 @@
 
 import koaResponseTime from 'koa-response-time';
 import koaStaticServer from 'koa-static-server';
+import koaSession from 'koa-generic-session';
 import koaValidate from 'koa-validate';
 import koaCompress from 'koa-compress';
-import koaSession from 'koa-session';
+import koaRedis from 'koa-redis';
 import koaBody from 'koa-body';
 import koa from 'koa';
 
@@ -30,7 +31,10 @@ app.use(koaStaticServer({rootDir: ROOT + '/client/dist/static', maxage: 30 * 24 
 
 // session
 app.keys = ['mok'];
-app.use(koaSession(app));
+app.use(koaSession({
+    prefix:'mok:session:',
+    store: koaRedis(CONFIG.redis)
+}));
 
 // body parser
 app.use(koaBody());
