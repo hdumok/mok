@@ -23,6 +23,7 @@ user.signin = function *() {
         return;
     }
 
+    //TODO:更严谨的话加密时要加盐
     if (utility.sha1(this.request.body.password) !== user.password) {
         this.status = 403;
         this.body = '密码错误';
