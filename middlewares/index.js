@@ -2,20 +2,20 @@
  * Created by hdumok on 2016/8/5.
  */
 
-"use strict";
+'use strict'
 
-import fs from 'fs';
-import path from 'path';
-import compose from 'koa-compose';
+import fs from 'fs'
+import path from 'path'
+import compose from 'koa-compose'
 
 const middlewaresRoot = path.join(ROOT, 'middlewares')
-const middlewaresFile = fs.readdirSync(middlewaresRoot);
-const middlewares = [];
+const middlewaresFile = fs.readdirSync(middlewaresRoot)
+const middlewares = []
 
 for (let file of middlewaresFile) {
-	if (file === 'index.js') continue;
+  if (file === 'index.js') continue
 
-	middlewares.push(require(path.join(middlewaresRoot, file)).default);
+  middlewares.push(require(path.join(middlewaresRoot, file)).default)
 }
 
 export default compose(middlewares)

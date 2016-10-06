@@ -2,68 +2,64 @@
  * Created by hdumok on 2016/8/5.
  */
 
-import fs from 'fs';
-import path from 'path';
-import koaRouter from 'koa-router';
+import fs from 'fs'
+import path from 'path'
+import koaRouter from 'koa-router'
 
-const controllersRoot = path.resolve(ROOT, "controllers");
-const controllersDir = fs.readdirSync(controllersRoot);
+const controllersRoot = path.resolve(ROOT, 'controllers')
+const controllersDir = fs.readdirSync(controllersRoot)
 
-const router = koaRouter();
+const router = koaRouter()
 
-function isController(dirPath) {
-	return fs.existsSync(path.join(dirPath, 'index.js')) &&
-		   fs.existsSync(path.join(dirPath, 'config.json'));
+function isController (dirPath) {
+  return fs.existsSync(path.join(dirPath, 'index.js')) && fs.existsSync(path.join(dirPath, 'config.json'))
 }
 
-function getControllers(root, dirs) {
+function getControllers (root, dirs) {
+  let list = []
+  for (let dir of dirs) {
+    let dirPath = path.join(root, dir)
+    if (!fs.lstatSync(dirPath).isDirectory()) continue
 
-	let list = [];
-	for(let dir of dirs){
-		let dirPath = path.join(root, dir);
-		if(!fs.lstatSync(dirPath).isDirectory())
-			continue;
-
-		if(isController(dirPath))
-			list.push(dirPath);
-		else{
-			let subDirs = fs.readdirSync(dirPath);
-			let subList = getControllers(dirPath, subDirs);
-			list = list.concat(subList);
-		}
-	}
-	return list;
+    if (isController(dirPath)) {
+      list.push(dirPath)
+    } else {
+      let subDirs = fs.readdirSync(dirPath)
+      let subList = getControllers(dirPath, subDirs)
+      list = list.concat(subList)
+    }
+  }
+  return list
 }
 
-const dirList = getControllers(controllersRoot, controllersDir);
+const dirList = getControllers(controllersRoot, controllersDir)
 
 for (let dir of dirList) {
+  const config = require(path.join(dir, 'config.json'))
 
-	const config = require(path.join(dir, 'config.json'));
+  // 关闭该路由
+  if (!config.status) continue
 
-	//关闭该路由
-	if(!config.status) continue;
+  const constroller = require(path.join(dir, 'index.js')).default
 
-	const constroller = require(path.join(dir, 'index.js')).default;
+  for (let key in config.routes) {
+    const keys = key.split(' ')
+    const method = keys[0]
+    const publicPath = config.prefix + keys[1]
 
-	for (let key in config.routes) {
+    let args = [publicPath]
 
-		const keys = key.split(' ')
-		const method = keys[0];
-		const publicPath = config.prefix + keys[1];
+    const funcs = config.routes[key].split(' ')
+    funcs.forEach(func => {
+      if (!constroller[func]) {
+        throw new Error(dir + ': exports.' + func + ' is not defined')
+      }
 
-		let args = [publicPath];
-		
-		const funcs = config.routes[key].split(' ');
-		funcs.forEach(func => {
-			if (!constroller[func])
-				throw new Error(dir + ': exports.' + func + ' is not defined');
+      args.push(constroller[func])
+    })
 
-			args.push(constroller[func]);
-		});
-
-		router[method.toLowerCase()].apply(router, args);
-	}
+    router[method.toLowerCase()].apply(router, args)
+  }
 }
 
-export default router.routes();
+export default router.routes()
