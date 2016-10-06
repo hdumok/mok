@@ -26,8 +26,10 @@ app.use(koaResponseTime())
 app.use(koaCompress())
 
 // serve static
-app.use(koaStaticServer({rootDir: ROOT + '/client/dist', rootPath: '/'}))
-app.use(koaStaticServer({rootDir: ROOT + '/client/dist/static', maxage: 30 * 24 * 60 * 60 * 1000, gzip: true, rootPath: '/static'}))
+if (NODE_ENV === 'production'){
+  app.use(koaStaticServer({rootDir: 'client/dist', index: 'index.html'}))
+  app.use(koaStaticServer({rootDir: 'client/dist/assets/static', maxage: 30 * 24 * 60 * 60 * 1000, gzip: true, rootPath: '/static'}))
+}
 
 // session
 app.keys = ['mok']
