@@ -6,14 +6,14 @@
         <div class="box">
             <div class="content-wrap">
                 <h6>登录</h6>
-                <input class="form-control" type="text" placeholder="邮箱地址">
-                <input class="form-control" type="password" placeholder="密码">
+                <input class="form-control" v-model="user.username" type="text" placeholder="用户名">
+                <input class="form-control" v-model="user.password" type="password" placeholder="密码">
                 <a href="#" class="forgot">忘记密码?</a>
                 <div class="remember">
                     <input id="remember-me" type="checkbox">
                     <label for="remember-me">记住密码</label>
                 </div>
-                <button class="btn-glow primary login" type="submit" v-on:click.prevent="signin">登录</button>
+                <button class="btn-glow primary login" v-on:click="signin">登录</button>
             </div>
         </div>
 
@@ -28,13 +28,19 @@
     export default {
         data () {
             return {
-                title: 'mok管理系统'
+                title: '登录',
+                user: {
+                    username: '',
+                    password: ''
+                }
             }
         },
         components: {},
         methods: {
             signin: function () {
-                this.$route.router.go('/')
+                this.$http.post('/api/user/signin', this.user).then(function() {
+                    this.$route.router.go('/')
+                })
             }
         }
     }

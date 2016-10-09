@@ -79,26 +79,6 @@
         /* notification menu with custom dropdowns */
         /* navbar popup dialog */
     }
-    .navbar-inverse input.search {
-        height: 27px;
-        width: 220px;
-        padding: 3px 6px;
-        background: url("/static/img/lens.png") #0f1217 no-repeat 95%;
-        border: 1px solid #0f1217;
-        position: relative;
-        border-radius: 4px;
-        top: 9px;
-        color: #000;
-        font-size: 13px;
-        margin-right: 40px;
-        -webkit-transition: all .3s linear;
-        -moz-transition: all .3s linear;
-        transition: all .3s linear;
-    }
-    .navbar-inverse input.search:focus {
-        background-color: #fff;
-        border: 0;
-    }
     .navbar-inverse .settings i {
         color: #9ba3ad;
         font-size: 21px;
@@ -124,7 +104,7 @@
         border-radius: 30px;
         color: #fff;
         line-height: 16px;
-        z-index: 9999;
+        z-index: 0;
         text-align: center;
         font-size: 11px;
     }

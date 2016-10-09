@@ -7,12 +7,12 @@
         <div class="box">
             <div class="content-wrap">
                 <h6>注册</h6>
-                <input class="form-control" type="text" placeholder="E-mail address">
-                <input class="form-control" type="password" placeholder="Password">
-                <input class="form-control" type="password" placeholder="Confirm Password">
+                <input class="form-control" v-model='user.username' type="text" placeholder="用户名">
+                <input class="form-control" v-model='user.password' type="password" placeholder="密码">
+                <input class="form-control" v-model='confirmPassword' type="password" placeholder="重复密码">
                 <div class="action">
-                    <a class="btn-glow primary signup" v-link="{path: '/api/user/signup'}">注册</a>
-                </div>
+                    <button class="btn-glow primary signup" v-on:click="signup">注册</button>
+               </div>
             </div>
         </div>
 
@@ -27,10 +27,22 @@
     export default {
         data () {
             return {
-                title: '注册'
+                title: '注册',
+                confirmPassword:'',
+                user: {
+                    username: '',
+                    password: ''
+                }
             }
         },
-        components: {}
+        components: {},
+        methods: {
+            signup: function () {
+                this.$http.post('/api/user/signup', this.user).then(function() {
+                    this.$route.router.go('/')
+                })
+            }
+        }
     }
 </script>
 
