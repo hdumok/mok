@@ -13,6 +13,7 @@ import koaRedis from 'koa-redis'
 import koaBody from 'koa-body'
 import koa from 'koa'
 
+import wechat from '../wechat'
 import middlewares from '../middlewares'
 import controllers from '../controllers'
 import lib from '../lib'
@@ -32,7 +33,7 @@ if (NODE_ENV === 'production'){
 }
 
 // session
-app.keys = ['mok']
+app.keys = ['newmok', 'mok']
 app.use(koaSession({
   prefix: 'mok:session:',
   store: koaRedis(CONFIG.redis)
@@ -40,6 +41,9 @@ app.use(koaSession({
 
 // body parser
 app.use(koaBody())
+
+// wechat
+app.use('/wechat', wechat)
 
 // validater
 koaValidate(app)

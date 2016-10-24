@@ -39,7 +39,9 @@
 	"production":"NODE_ENV=production node index.js",
 	"development":"NODE_ENV=development node index.js",
 	"standard": "standard.cmd",
-	"fix": "standard.cmd --fix"
+	"fix": "standard.cmd --fix",
+	"menu":"NODE_ENV=production node index.js",
+	"dev_menu":"NODE_ENV=development node index.js"
   },
   "standard": {
     "globals": [
