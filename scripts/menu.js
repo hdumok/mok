@@ -2,10 +2,10 @@
  * Created by hdumok on 2016/10/9.
  */
 
-var co = require('co');
-var WechatAPI = require('co-wechat-api');
-var env = process.env.NODE_ENV || "development";
-var wechatConfig = require('../config')[env];
+var co = require('co')
+var WechatAPI = require('co-wechat-api')
+var env = process.env.NODE_ENV || 'development'
+var wechatConfig = require('../config')[env]
 var wechat = new WechatAPI(wechatConfig.appID, wechatConfig.appsecret)
 
 co(function*() {
@@ -22,78 +22,78 @@ co(function*() {
      10、view_limited：跳转图文消息URL用户点击view_limited类型按钮后，微信客户端将打开开发者在按钮中填写的永久素材id对应的图文消息URL，永久素材类型只支持图文消息。请注意：永久素材id必须是在“素材管理/新增永久素材”接口上传后获得的合法id。
      */
 
-    let menu = {
-        'button': [
-            {
-                'type': 'view',
-                'name': '智慧中心',
-                'url': 'http://motor.adonging.com/v2/?agentid=1&from=MicroMessenger&themename=standard&relogin=1'
-            },
-            {
-                'name': '服务',
-                'sub_button': [
-                    {
-                        'type': 'view',
-                        'name': '救援维修',
-                        'url': 'http://motor.adonging.com/v2/?agentid=1&from=MicroMessenger&themename=standard&hash=/sos'
-                    },
-                    {
-                        'type': 'view',
-                        'name': '互助寻车',
-                        'url': 'http://motor.adonging.com/v2/?agentid=1&from=MicroMessenger&themename=standard&hash=/loss'
-                    },
-                    {
-                        'type': 'view',
-                        'name': '服务充值',
-                        'url': 'http://motor.adonging.com/v2/?agentid=1&from=MicroMessenger&themename=standard&hash=/recharge/item'
-                    },
-                    {
-                        'type': 'view',
-                        'name': '车友记APP',
-                        'url': 'http://adonging.cn/cyjapp.html'
-                    },
-                    {
-                        'type': 'click',
-                        'name': '使用手册',
-                        'key': 'Handbook'
-                    }
-                ]
-            },
-            {
-                'name': '更多',
-                'sub_button': [
-                    {
-                        'type': 'click',
-                        'name': '最新活动',
-                        'key': 'NewActivity'
-                    },
-                    {
-                        'type': 'view',
-                        'name': '附近门店',
-                        'url': 'http://motor.adonging.com/v2/?agentid=1&from=MicroMessenger&themename=standard&hash=/stores'
-                    },
-                    {
-                        'type': 'view',
-                        'name': '意见反馈',
-                        'url': 'http://motor.adonging.com/v2/?agentid=1&from=MicroMessenger&themename=standard&hash=/feedback'
-                    },
-                    {
-                        'type': 'click',
-                        'name': '联系客服',
-                        'key': 'CustomerService'
-                    }
-                ]
-            }
+  let menu = {
+    'button': [
+      {
+        'type': 'view',
+        'name': '智慧中心',
+        'url': 'http://motor.adonging.com/v2/?agentid=1&from=MicroMessenger&themename=standard&relogin=1'
+      },
+      {
+        'name': '服务',
+        'sub_button': [
+          {
+            'type': 'view',
+            'name': '救援维修',
+            'url': 'http://motor.adonging.com/v2/?agentid=1&from=MicroMessenger&themename=standard&hash=/sos'
+          },
+          {
+            'type': 'view',
+            'name': '互助寻车',
+            'url': 'http://motor.adonging.com/v2/?agentid=1&from=MicroMessenger&themename=standard&hash=/loss'
+          },
+          {
+            'type': 'view',
+            'name': '服务充值',
+            'url': 'http://motor.adonging.com/v2/?agentid=1&from=MicroMessenger&themename=standard&hash=/recharge/item'
+          },
+          {
+            'type': 'view',
+            'name': '车友记APP',
+            'url': 'http://adonging.cn/cyjapp.html'
+          },
+          {
+            'type': 'click',
+            'name': '使用手册',
+            'key': 'Handbook'
+          }
         ]
-    };
+      },
+      {
+        'name': '更多',
+        'sub_button': [
+          {
+            'type': 'click',
+            'name': '最新活动',
+            'key': 'NewActivity'
+          },
+          {
+            'type': 'view',
+            'name': '附近门店',
+            'url': 'http://motor.adonging.com/v2/?agentid=1&from=MicroMessenger&themename=standard&hash=/stores'
+          },
+          {
+            'type': 'view',
+            'name': '意见反馈',
+            'url': 'http://motor.adonging.com/v2/?agentid=1&from=MicroMessenger&themename=standard&hash=/feedback'
+          },
+          {
+            'type': 'click',
+            'name': '联系客服',
+            'key': 'CustomerService'
+          }
+        ]
+      }
+    ]
+  }
 
-    let result = yield wechat.createMenu(menu);
-    if (result.errcode !== 0) {
-        console.error(env+' 环境的微信菜单创建失败, errmsg: ' + result.errmsg)
-    }else{
-        console.log(env+' 环境的微信菜单创建成功')
-    }
-}).then(function() {
-    process.exit();
+  let result = yield wechat.createMenu(menu)
+  if (result.errcode !== 0) {
+    console.error(env + ' 环境的微信菜单创建失败, errmsg: ' + result.errmsg)
+  } else {
+    console.log(env + ' 环境的微信菜单创建成功')
+  }
+}).then(function () {
+  process.exit()
 }).catch(console.error)
 

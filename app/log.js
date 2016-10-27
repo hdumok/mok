@@ -5,28 +5,28 @@
 'use strict'
 
 import co from 'co'
-import util from 'util'
 import nodemailer from 'nodemailer'
+// import mongo from '../lib/mongo'
 import redis from '../lib/redis'
 import Promise from 'bluebird'
 
-const maxLength = 20;
+const maxLength = 20
 
 co(function *() {
-  while(true) {
-    let length = yield redis.llen(CONSTANTS.CHANNEL_LOG);
-    if(length > maxLength) length = maxLength;
+  while (true) {
+    let length = yield redis.llen(CONSTANTS.CHANNEL_LOG)
+    if (length > maxLength) length = maxLength
 
-    let messages = '';
+    let messages = ''
     for (let i = 0; i < length; i++) {
-       messages = `${yield redis.rpop(CONSTANTS.CHANNEL_LOG)}\n\n${messages}`;
+      messages = `${yield redis.rpop(CONSTANTS.CHANNEL_LOG)}\n\n${messages}`
     }
 
-    if(messages != '') sentAlarmEmail(messages);
+    if (messages !== '') sentAlarmEmail(messages)
 
-    yield Promise.delay(3000);
+    yield Promise.delay(3000)
   }
-});
+})
 
 var sentAlarmEmail = (function () {
   var transporter = nodemailer.createTransport({
@@ -49,4 +49,3 @@ var sentAlarmEmail = (function () {
   }
 })()
 
-console.log('==== log server started in %s mode, listening on %s ====', NODE_ENV, CONFIG.wechat.port)

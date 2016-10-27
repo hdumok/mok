@@ -27,10 +27,8 @@ app.use(koaResponseTime())
 app.use(koaCompress())
 
 // serve static
-if (NODE_ENV === 'production'){
-  app.use(koaStaticServer({rootDir: 'client/dist', index: 'index.html'}))
-  app.use(koaStaticServer({rootDir: 'client/dist/assets/static', maxage: 30 * 24 * 60 * 60 * 1000, gzip: true, rootPath: '/static'}))
-}
+app.use(koaStaticServer({rootDir: 'client/dist', index: 'index.html'}))
+app.use(koaStaticServer({rootDir: 'client/dist/assets/static', maxage: 30 * 24 * 60 * 60 * 1000, gzip: true, rootPath: '/static'}))
 
 // session
 app.keys = ['newmok', 'mok']
@@ -43,7 +41,13 @@ app.use(koaSession({
 app.use(koaBody())
 
 // wechat
-app.use('/wechat', wechat)
+app.use(function *(next) {
+  if (this.request.path === '/wechat') {
+    yield wechat
+  } else {
+    yield next
+  }
+})
 
 // validater
 koaValidate(app)
@@ -54,11 +58,11 @@ app.use(lib)
 
 app.use(controllers)
 
-app.listen(CONFIG.server.port, function (err) {
+app.listen(CONFIG.port, function (err) {
   if (err) {
     console.error(err)
     return
   }
 
-  console.log('==== server started in %s mode, listening on %s ====', NODE_ENV, CONFIG.server.port)
+  console.log('==== server started in %s mode, listening on %s ====', NODE_ENV, CONFIG.port)
 })

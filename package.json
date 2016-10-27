@@ -28,6 +28,7 @@
     "koa-validate": "^1.0.6",
     "lodash": "^4.15.0",
     "log4js": "^0.6.38",
+    "mongoose": "^4.6.5",
     "mysql": "^2.11.1",
     "nodemailer": "^2.6.4",
     "utility": "^1.8.0"
@@ -36,23 +37,24 @@
     "standard": "^8.3.0"
   },
   "scripts": {
-	"production":"NODE_ENV=production node index.js",
-	"development":"NODE_ENV=development node index.js",
-	"standard": "standard.cmd",
-	"fix": "standard.cmd --fix",
-	"menu":"NODE_ENV=production node index.js",
-	"dev_menu":"NODE_ENV=development node index.js"
+    "production": "NODE_ENV=production node index.js",
+    "development": "NODE_ENV=development node index.js",
+    "standard": "standard.cmd",
+    "fix": "standard.cmd --fix",
+    "menu": "NODE_ENV=production node index.js",
+    "dev_menu": "NODE_ENV=development node index.js"
   },
   "standard": {
     "globals": [
-	  "NODE_ENV",
-	  "ROOT",
-	  "CONSTANTS",
+      "NODE_ENV",
+      "ROOT",
+      "CONSTANTS",
       "CONFIG",
-	  "LOG_LEVEL"
+      "LOG_LEVEL"
     ],
     "ignore": [
-      "client/"
+      "client/",
+      "node_modules/"
     ]
   },
   "author": "hdumok",
